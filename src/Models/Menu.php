@@ -144,7 +144,7 @@ class Menu extends Model
             return !$item->children->isEmpty() || Auth::user()->can('browse', $item);
         })->filter(function ($item) {
             // Filter out empty menu-items
-            if ($item->url == '' && $item->route == '' && $item->children->count() == 0) {
+            if ($item->icon_class && $item->url == '' && $item->route == '' && $item->children->count() == 0) {
                 return false;
             }
 
