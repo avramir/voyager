@@ -12,10 +12,17 @@
                     $relationshipData = (isset($data)) ? $data : $dataTypeContent;
                     $model = app($options->model);
                     $query = $model::where($options->key,$relationshipData->{$options->column})->first();
+
+                    $relatedDataType = Voyager::model('DataType')->where('name', $options->model);
+                    $link = $relatedDataType && isset($query) ? route('voyager.' . $dataType->slug.'.show', [ 'id' => $query->id ]) : null;
                 @endphp
 
                 @if(isset($query))
-                    <p>{{ $query->{$options->label} }}</p>
+                    @if ($link)
+                        <p><a href="{{ $link }}">{{ $query->{$options->label} }}</a></p>
+                    @else
+                        <p>{{ $query->{$options->label} }}</p>
+                    @endif
                 @else
                     <p>{{ __('voyager::generic.no_results') }}</p>
                 @endif
