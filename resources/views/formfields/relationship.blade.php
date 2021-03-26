@@ -14,7 +14,7 @@
                     $query = $model::where($options->key,$relationshipData->{$options->column})->first();
 
                     $relatedDataType = Voyager::model('DataType')->where('name', $options->model);
-                    $link = $relatedDataType && isset($query) ? route('voyager.' . $dataType->slug.'.show', [ 'id' => $query->id ]) : null;
+                    $link = $relatedDataType && isset($query) ? route('voyager.' . $relatedDataType->slug.'.show', [ 'id' => $query->id ]) : null;
                 @endphp
 
                 @if(isset($query))
