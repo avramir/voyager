@@ -16,7 +16,7 @@
             @include('voyager::partials.bulk-delete')
         @endcan
         @can('edit', app($dataType->model_name))
-            @if(isset($dataType->order_column) && isset($dataType->order_display_column))
+            @if(!empty($dataType->order_column) && !empty($dataType->order_display_column))
                 <a href="{{ route('voyager.'.$dataType->slug.'.order') }}" class="btn btn-primary btn-add-new">
                     <i class="voyager-list"></i> <span>{{ __('voyager::bread.order') }}</span>
                 </a>
@@ -85,7 +85,7 @@
                                         @endif
                                         @foreach($dataType->browseRows as $row)
                                         <th>
-                                            @if ($isServerSide && $row->type !== 'relationship')
+                                            @if ($isServerSide && in_array($row->field, $sortableColumns))
                                                 <a href="{{ $row->sortByUrl($orderBy, $sortOrder) }}">
                                             @endif
                                             {{ $row->getTranslatedAttribute('display_name') }}
@@ -145,7 +145,7 @@
                                                     @endif
 
                                                     @elseif($row->type == 'multiple_checkbox' && property_exists($row->details, 'options'))
-                                                        @if (@count(json_decode($data->{$row->field})) > 0)
+                                                        @if (@count(json_decode($data->{$row->field}, true)) > 0)
                                                             @foreach(json_decode($data->{$row->field}) as $item)
                                                                 @if (@$row->details->options->{$item})
                                                                     {{ $row->details->options->{$item} . (!$loop->last ? ', ' : '') }}
