@@ -1,6 +1,8 @@
 <p align="center"><a href="https://voyager.devdojo.com" target="_blank"><img width="400" src="https://s3.amazonaws.com/thecontrolgroup/voyager.png"></a></p>
 
-<p align="center"><a href="https://github.com/thedevdojo/wave" target="_blank"><img src="https://cdn.devdojo.com/images/april2021/learnmore-wave.png" height="auto" width="100%"></a></p>
+> Voyager is built with Vue and Bootstrap. If you are looking for a Laravel Starter Kit built that uses Livewire and Tailwind, you may be interested in checking out [Genesis](https://github.com/thedevdojo/genesis)
+
+<p align="center"><a href="https://github.com/thedevdojo/genesis" target="_blank"><img src="https://github.com/thedevdojo/voyager/assets/601261/6ffa6ac4-ea1e-4c8a-8360-b347377b8201" height="auto" width="100%"></a></p>
 
 <p align="center">
 <a href="https://packagist.org/packages/tcg/voyager"><img src="https://poser.pugx.org/tcg/voyager/downloads.svg?format=flat" alt="Total Downloads"></a>
@@ -24,9 +26,9 @@ View the Voyager Cheat Sheet: https://voyager-cheatsheet.ulties.com/
 
 <hr>
 
-Laravel Admin & BREAD System (Browse, Read, Edit, Add, & Delete), supporting Laravel 6 and newer!
+Laravel Admin & BREAD System (Browse, Read, Edit, Add, & Delete), supporting Laravel 8 and newer!
 
-> Want to use Laravel 5? Use [Voyager 1.3](https://github.com/the-control-group/voyager/tree/1.3)
+> Want to use Laravel 6 or 7? Use [Voyager 1.5](https://github.com/the-control-group/voyager/tree/1.5)
 
 ## Installation Steps
 
@@ -36,6 +38,12 @@ After creating your new Laravel application you can include the Voyager package 
 
 ```bash
 composer require tcg/voyager
+```
+
+> If you are installing this on Laravel 10, we are working on getting a permanent release available; however, you can still use this with Larvel 10 by requiring the following:
+
+```bash
+composer require tcg/voyager dev-1.6-l10
 ```
 
 ### 2. Add the DB Credentials & APP_URL
