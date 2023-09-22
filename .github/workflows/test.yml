@@ -18,10 +18,25 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        php: [7.3, 7.4, 8.0]
-        laravel: ['6.*', '7.*', '8.*']
+        php: [7.3, 7.4, 8.0, 8.1, 8.2]
+        laravel: ['8.*', '9.*', '10.*']
+        exclude:
+          - php: 8.2
+            laravel: 8.*
+          - php: 7.3
+            laravel: 9.*
+          - php: 7.4
+            laravel: 9.*
+          - php: 8.2
+            laravel: 9.*
+          - php: 7.3
+            laravel: 10.*
+          - php: 7.4
+            laravel: 10.*
+          - php: 8.0
+            laravel: 10.*
 
-    name: 'PHP ${{ matrix.php }} / ${{ matrix.laravel }}'
+    name: 'PHP ${{ matrix.php }} / Laravel ${{ matrix.laravel }}'
 
     steps:
       - uses: actions/checkout@master
@@ -37,20 +52,19 @@ jobs:
       # Configure NPM
       - uses: actions/setup-node@v1
         with:
-          node-version: '14.x'
+          node-version: '16.x'
 
       # Install PHP dependencies
       - name: Install Composer dependencies
         run: composer require "illuminate/support:${{ matrix.laravel }}"
 
-      # Install legacy factories for Laravel 8
-      - name: Install legacy factories for Laravel
-        if: ${{ matrix.laravel == '8.*' }}
-        run: composer require laravel/legacy-factories
-
       # Display installed laravel version
       - name: Show laravel version
         run: composer show laravel/framework
+
+      # Generate vendor symlink
+      - name: Generate vendor symlink
+        run: ./vendor/bin/testbench
 
       # Install NPM dependencies
       - name: Install Dependencies
